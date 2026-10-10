@@ -1,7 +1,7 @@
 from Wordle import WordleGame
 import json
 
-wordle_game = WordleGame(json.load(open("words_dictionary.json")), number_of_guesses=5)
+wordle_game = WordleGame(json.load(open("words_dictionary.json")))
 tile_backgrounds = {"G": "\033[42m", "Y": "\033[43m", "B": "\033[100m"}
 
 while True:

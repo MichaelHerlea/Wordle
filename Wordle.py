@@ -9,6 +9,7 @@ class WordleGame:
     def initialize(self, number_of_guesses=5):
         self.target_word = random.choice(self.words_list)
         self.target_word_length = len(self.target_word)
+        self.target_word_set = set(self.target_word)
         self.number_of_guesses = number_of_guesses
 
     def make_guess(self, guess):
@@ -23,6 +24,7 @@ class WordleGame:
             return output
         if self.number_of_guesses <= 0:
             output.feedback = "No guesses left."
+            output.is_valid = False
             output.is_game_over = True
             return output
         self.number_of_guesses -= 1
@@ -31,7 +33,7 @@ class WordleGame:
         for i in range(self.target_word_length):
             if guess[i] == self.target_word[i]:
                 feedback.append("G")  # Green
-            elif guess[i] in self.target_word:
+            elif guess[i] in self.target_word_set:
                 feedback.append("Y")  # Yellow
             else:
                 feedback.append("B")  # Black
@@ -39,6 +41,9 @@ class WordleGame:
 
         if output.feedback == "G" * self.target_word_length:
             output.is_won = True
+            output.is_game_over = True
+
+        if self.number_of_guesses <= 0:
             output.is_game_over = True
         return output
 
