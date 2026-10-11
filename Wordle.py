@@ -2,7 +2,7 @@ import random
 
 class WordleGame:
     def __init__(self, words, number_of_guesses=5):
-        self.words_set = set(words)
+        self.words_set = words
         self.words_list = list(self.words_set)
         self.initialize(number_of_guesses)
 
