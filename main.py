@@ -1,5 +1,3 @@
-import time
-
 from wordle import WordleGame
 from agent import Agent
 import json
@@ -7,7 +5,7 @@ import json
 words = set(json.load(open("words_dictionary.json")))
 tile_backgrounds = {"G": "\033[42m", "Y": "\033[43m", "B": "\033[100m"}
 
-wordle_game = WordleGame(words, 10)
+wordle_game = WordleGame(words)
 agent = Agent(words, wordle_game.target_word_length)
 
 while True:

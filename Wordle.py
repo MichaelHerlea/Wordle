@@ -4,13 +4,16 @@ class WordleGame:
     def __init__(self, words, number_of_guesses=5):
         self.words_set = words
         self.words_list = list(self.words_set)
-        self.initialize(number_of_guesses)
+        self.configured_number_of_guesses = number_of_guesses
+        self.initialize()
 
-    def initialize(self, number_of_guesses=5):
+    def initialize(self, number_of_guesses=None):
         self.target_word = random.choice(self.words_list)
         self.target_word_length = len(self.target_word)
         self.target_word_set = set(self.target_word)
-        self.number_of_guesses = number_of_guesses
+        if number_of_guesses is not None:
+            self.configured_number_of_guesses = number_of_guesses
+        self.number_of_guesses = self.configured_number_of_guesses
 
     def make_guess(self, guess):
         output = GuessResult(guess)
