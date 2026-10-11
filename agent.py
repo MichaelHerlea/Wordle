@@ -46,3 +46,17 @@ class Agent:
                 if word[index] == character:
                     return False
         return True
+
+    def make_guess(self):
+        max_value = (-1, "")
+        for word in self.local_words_set:
+            local_max_value = self.target_length
+            for character in word:
+                if character in self.green_characters:
+                    local_max_value -= 1
+                elif character in self.yellow_characters:
+                    local_max_value -= 0.5
+            if local_max_value == self.target_length: return word
+            if local_max_value > max_value[0]:
+                max_value = (local_max_value, word)
+        return max_value[1]

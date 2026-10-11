@@ -1,3 +1,5 @@
+import time
+
 from wordle import WordleGame
 from agent import Agent
 import json
@@ -5,11 +7,12 @@ import json
 words = set(json.load(open("words_dictionary.json")))
 tile_backgrounds = {"G": "\033[42m", "Y": "\033[43m", "B": "\033[100m"}
 
-wordle_game = WordleGame(words)
+wordle_game = WordleGame(words, 10)
 agent = Agent(words, wordle_game.target_word_length)
 
 while True:
-    guess = input(f"Enter a {wordle_game.target_word_length}-letter word: ").strip().lower()
+    #guess = input(f"Enter a {wordle_game.target_word_length}-letter word: ").strip().lower()
+    guess = agent.make_guess()
     guess_result = wordle_game.make_guess(guess)
     agent.process_feedback(guess_result)
     if guess_result.is_valid:
