@@ -13,7 +13,7 @@ class WordleGame:
         self.target_word_set = set(self.target_word)
         if number_of_guesses is not None:
             self.configured_number_of_guesses = number_of_guesses
-        self.number_of_guesses = self.configured_number_of_guesses
+        self.number_of_guesses_left = self.configured_number_of_guesses
 
     def make_guess(self, guess):
         output = GuessResult(guess)
@@ -25,12 +25,12 @@ class WordleGame:
             output.feedback = "Invalid word."
             output.is_valid = False
             return output
-        if self.number_of_guesses <= 0:
+        if self.number_of_guesses_left <= 0:
             output.feedback = "No guesses left."
             output.is_valid = False
             output.is_game_over = True
             return output
-        self.number_of_guesses -= 1
+        self.number_of_guesses_left -= 1
 
         feedback = []
         for i in range(self.target_word_length):
@@ -46,7 +46,7 @@ class WordleGame:
             output.is_won = True
             output.is_game_over = True
 
-        if self.number_of_guesses <= 0:
+        if self.number_of_guesses_left <= 0:
             output.is_game_over = True
         return output
 
