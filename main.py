@@ -1,8 +1,12 @@
-from Wordle import WordleGame
+from wordle import WordleGame
+from agent import Agent
 import json
 
-wordle_game = WordleGame(json.load(open("words_dictionary.json")))
+words = json.load(open("words_dictionary.json"))
 tile_backgrounds = {"G": "\033[42m", "Y": "\033[43m", "B": "\033[100m"}
+
+wordle_game = WordleGame(words)
+agent = Agent(words, wordle_game.target_word_length)
 
 while True:
     guess = input(f"Enter a {wordle_game.target_word_length}-letter word: ").strip().lower()
