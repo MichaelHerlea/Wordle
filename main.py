@@ -2,10 +2,11 @@ from wordle import WordleGame
 from agent import Agent
 import json
 
-words = set(json.load(open("words_dictionary.json")))
+#words = set(json.load(open("words_dictionary.json")))
+words = set(json.load(open("words.json")))
 tile_backgrounds = {"G": "\033[42m", "Y": "\033[43m", "B": "\033[100m"}
 
-wordle_game = WordleGame(words)
+wordle_game = WordleGame(words, 100)
 agent = Agent(words, wordle_game.target_word_length)
 
 while True:
@@ -28,3 +29,5 @@ while True:
         else:
             print(f"Game over! The word was: {wordle_game.target_word}")
         break
+        wordle_game.initialize()
+        agent.initialize(wordle_game.target_word_length)
